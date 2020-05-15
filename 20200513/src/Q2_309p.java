@@ -1,6 +1,6 @@
 /*
  * Q2. 다음 형태로 표현된 2차원 배열이 존재한다고 가정해보자/.
- * 		1	2	3	1행
+ * 		1	2	3	1행  
  * 		4	5	6	2행
  * 		7	8	9	3행
  * 		이러한 형태를 갖는 int형 2차원 배열이 인자로 전달되면, 다음의 형태로 배열의 구조를 변경시키는
@@ -10,31 +10,33 @@
  * 		4	5	6	3행
  * 		물론 배열의 가로와 세로 길이에 상관없이 위와 같이 동작하도록 메소드를 정의해야한다.
  * */
+/*
+1	2	3			10	11	12
+4	5	6			1	2	3	
+7   8  9			4	5	6
+10 11 12			7	8	9
+*/
 public class Q2_309p {
 	public static void main(String[] args) {
 		int [][] arrA = new int[][] {
 			{1,2,3},
 			{4,5,6},
-			{7,8,9}
+			{7,8,9,11},
+			{10,11,12},
 		};
 		int [][] arrB = new int[100][100];
+		int a = (arrA.length)-1; 
 		
-		
-		for(int i = 0; i<arrA[0].length;i++) {
-			arrB[2][i] = arrA[0][i]; 
-			arrA[0][i] = arrA[2][i];
-			arrA[2][i] = arrB[2][i];
-		}
-		for(int i = 0; i<arrA[0].length;i++) {
-
-			arrB[2][i] = arrA[1][i];
-			arrA[1][i] = arrA[2][i];
-			arrA[2][i] = arrB[2][i];
+		for(int j = 0;j<a;j++) { 
+			for(int i = 0;i<arrA[0].length;i++) {
+				arrB[0][i] = arrA[a][i];
+				arrB[a-j][i] = arrA[a-(j+1)][i];				
+			}
 		}
 		
-		for(int i = 0; i<arrA[0].length;i ++) {
+		for(int i = 0; i<arrA.length;i ++) {
 			for(int j = 0; j< arrA[0].length;j++) {
-				System.out.print(arrA[i][j]+"\t");
+				System.out.print(arrB[i][j]+"\t");
 			}
 			System.out.println();
 		}
